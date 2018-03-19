@@ -1,0 +1,226 @@
+#include <stdio.h>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+int intf(int *h, int *m, int *s);
+int intf(int m, int d);
+int intf2(int m, int d);
+void f(int *m1, int *m0, int N);
+int f(int m1, int m2, int m3);
+bool even(int n);
+int f(int n, int m);
+long factorial (int n);
+
+
+int main(int argc, char** argv) {
+	int task_num;
+	printf ("Enter the task number: \n");
+	scanf("%d", &task_num);
+	
+	if (task_num==1)
+	{
+		int h, m, s;
+	    printf ("Vvedite vremya v chasah: \n");
+	    scanf ("%d", &h);
+	    printf ("Vvedite vremya v minutah: \n");
+	    scanf ("%d", &m);
+	    printf ("Vvedite vremya v sekundah: \n");
+	    scanf ("%d", &s);
+	    printf ("S nachala dnya vremya v sekundah: ");
+	    printf ("%d", intf(&h, &m, &s));
+	}
+	if (task_num==2)
+	{
+		int m, d;
+	    printf ("Vvedite mesyac: \n");
+	    scanf ("%d", &m);
+	    printf ("Vvedite den': \n");
+	    scanf ("%d", &d);
+	
+	    printf ("S nachala goda proshlo: ");
+	    printf ("%d", intf(m, d));
+	    printf(" dnei");
+	}
+	if(task_num==3)
+	{
+		int m, d;
+	    printf ("Vvedite mesyac: \n");
+	    scanf ("%d", &m);
+	    printf ("Vvedite den': \n");
+	    scanf ("%d", &d);
+	
+	    printf ("S nachala goda proshlo: ");
+	    printf ("%d", intf2(m, d));
+	    printf(" dnei");
+	}
+	if(task_num==4)
+	{
+		int N;
+	    int m1;
+	    int m0;
+	
+	    printf("Vvedite dvuznachnoe chislo N: ");
+	    scanf("%d", &N);
+	    printf("Pervaya i poslednyaya cifra chisla: ");
+	    f(&m1, &m0, N);
+	}
+	if(task_num==5)
+	{
+		int m1, m2, m3;
+	
+	    printf("Vvedite 3 celyh chisla:");
+	    scanf("%d %d %d", &m1, &m2, &m3);
+	    printf ("Naimen'shee iz 3 chisel yavlyaetsya chislo %d", f(m1, m2, m3));
+	}
+	if(task_num==6)
+	{
+		int n;
+	    printf("Vvedite celoe chislo: ");
+	    scanf("%d", &n);
+	    if(even(n)){
+		    printf("Chislo %d chetnoe.\n", n);
+	    }else{
+		    printf("Chislo %d nechetnoe.\n", n);
+	    }
+	}
+	if (task_num==7)
+	{
+		int n, m;
+	    printf("Vvedite 2 celyh chisla: ");
+	    scanf("%d %d", &n, &m);
+	    if(f(n,m)){
+		    printf("Chislo %d kratno chislu %d\n", n, m);		
+	    }else {
+		    printf("Chislo %d ne kratno chislu %d\n", n, m);
+	    }
+	}
+	if(task_num==8)
+	{
+		int n;
+        long f;
+    
+        printf("Vvedite natural'noe chislo n: ");
+        scanf("%d", &n);
+        f=factorial(n);
+        printf("%d! = %ld\n", n, f);    
+	}
+	if (task_num==9)
+	{
+		int num, temp, sum;
+        printf("Vvedite chislo: ");
+        scanf("%d", &num);
+        temp = num;
+        while (temp > 10)
+        {
+            sum = 0;
+            while (temp)
+            {
+                sum += temp % 10;
+                temp /= 10;
+            }
+            temp = sum;
+        }
+    
+        printf("Cifrovoy koren' chisla %d: %d", num, temp);
+	}
+	return 0;
+}
+
+int intf(int *h, int *m, int *s)
+{
+	int sec=0;
+	sec=(*h)*3600+(*m)*60 + *s;
+	return sec;
+}
+
+
+int intf(int m, int d)
+{
+	int day=0;
+	day=(m-1)*30+d;
+	return day;
+}
+
+int intf2(int m, int d)
+{
+	int day=0;
+	switch(m)
+	{
+		case 1:
+			return d;
+			break;
+		case 2:
+			return 31+d;
+			break;
+		case 3:
+			return 61+d;
+			break;
+		case 4:
+			return 31*2+30+d;
+			break;
+		case 5:
+			return 31*2+30*2+d;
+			break;
+		case 6:
+			return 31*3+30*2+d;
+			break;
+		case 7:
+			return 31*3+30*3+d;
+			break;		   
+		case 8:
+			return 31*4+30*3+d;
+			break;
+		case 9:
+			return 31*5+30*3+d;
+			break;
+		case 10:
+			return 31*5+30*4+d;
+			break;
+		case 11:
+			return 31*6+30*4+d;
+			break;
+		case 12:
+			return 31*6+30*5+d;
+			break;
+	}	
+}
+
+void f(int *m1, int *m0, int N)
+{
+	*m1=N/10;
+	*m0=N%10;
+	printf("%d %d", *m1, *m0);
+}
+
+int f(int m1, int m2, int m3)
+{
+	if((m1>m3)&&(m2>m3))
+	    return m3;
+	if((m2>m1)&&(m3>m1))
+	    return m1;
+	if((m3>m2)&&(m1>m2))
+	    return m2;
+}
+
+bool even(int n)
+{
+	if(n%2==0)
+	    return true;
+	else 
+	    return false;
+}
+
+int f(int n, int m)
+{
+	if((m%n==0)&&(n<m))
+	    return 1;
+	else 
+	    return 0;
+}
+
+long factorial (int n)
+{
+	if(n==0)
+	   return 1;
+	else
+	   return (n*factorial(n-1));
+}
